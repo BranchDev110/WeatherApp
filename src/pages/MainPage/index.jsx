@@ -1,10 +1,14 @@
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import React from 'react';
+import NavBar from '../../components/NavBar';
 
 const MainPage = () => {
     return (
         <>
-            <Button variant='contained'>Hello</Button>
+            <NavBar />
+            <Container>
+                <Button>ASDF</Button>
+            </Container>
         </>
     )
 }

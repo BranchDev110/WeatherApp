@@ -14,11 +14,13 @@ const MainPage = () => {
     const [options , setOptions] = useState([]);
     const [pageLoading, setPageLoading] = useState(false);
 
-    const {data, isLoading, error} = useQuery(
+    const {data, error} = useQuery(
         ['fetchWeather' , searchStr],
         () => fetchWeather(searchStr),
         { enabled: searchStr.length !== 0 }
     );
+
+    if(error) return;
 
     const handleChange = useCallback(({target: { value }}) => {
         if(!!value){
@@ -26,7 +28,7 @@ const MainPage = () => {
             console.log(city);
             setOptions(filtered);
         }
-    }, [city, setOptions]);
+    }, [city]);
 
     const debouncedChangeHandler = useCallback(debounce(handleChange, 300), [handleChange]);
 

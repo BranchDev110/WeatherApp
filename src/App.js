@@ -4,19 +4,24 @@ import './App.css';
 import { MainPage } from './pages';
 import palette from './theme';
 import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 function App() {
-  const isLight = true;
+  const isLight = false;
 
   const themeOption = useMemo(() => ({
     palette: isLight ? palette.light : palette.dark
   }) , [isLight])
   const theme = createTheme(themeOption);
 
+  const queryClient = new QueryClient();
+
   return (
-    <MUIThemeProvider theme={theme}>
-      <MainPage />
-    </MUIThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <MUIThemeProvider theme={theme}>
+        <MainPage />
+      </MUIThemeProvider>
+    </QueryClientProvider>
   );
 }
 

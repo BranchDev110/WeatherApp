@@ -1,10 +1,11 @@
+import { ThemeProvider } from '@emotion/react';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <ThemeProvider>
       
-    </div>
+    </ThemeProvider>
   );
 }
 

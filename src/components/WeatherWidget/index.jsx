@@ -3,9 +3,6 @@ import { Typography, CardContent, Box } from '@mui/material';
 
 const WeatherWidget = ({weatherReport}) => {
     if(!weatherReport) return;
-    var lon = weatherReport.coord.lon;
-    var lat = weatherReport.coord.lat;
-    var weathermain = weatherReport.weather[0].main;
     var weatherdiscription = weatherReport.weather[0].description;
     var temp = weatherReport.main.temp;
     var pressure = weatherReport.main.pressure;

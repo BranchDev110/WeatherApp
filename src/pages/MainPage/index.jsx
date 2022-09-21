@@ -19,26 +19,29 @@ const MainPage = () => {
         () => fetchWeather(searchStr),
         { enabled: searchStr.length !== 0 }
     );
-
-    if(error) return;
-
-    const handleChange = useCallback(({target: { value }}) => {
+    
+    const handleChange = ({target: { value }}) => {
         if(!!value){
             const filtered = city.filter(item => item.name.includes(value) || item.state.includes(value));
             console.log(city);
             setOptions(filtered);
         }
-    }, [city]);
+    };
 
-    const debouncedChangeHandler = useCallback(debounce(handleChange, 300), [handleChange]);
+    const debouncedChangeHandler = useCallback(debounce(handleChange, 300), [city]);
 
     useEffect(() => {
         import("../../data/city.json").then(result => setCity([...result.default]));
+        return () => {
+            debouncedChangeHandler.cancel();
+        }
     } , [])
 
     useEffect(() => {
         if(!!city.length) setPageLoading(true);
     }, [city])
+
+    if(error) return;
 
     const handleResultChange = (event, value) => {
         setSearchStr(value.id);

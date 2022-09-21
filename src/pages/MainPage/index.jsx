@@ -23,7 +23,6 @@ const MainPage = () => {
     const handleChange = ({target: { value }}) => {
         if(!!value){
             const filtered = city.filter(item => item.name.includes(value) || item.state.includes(value));
-            console.log(city);
             setOptions(filtered);
         }
     };

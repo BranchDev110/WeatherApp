@@ -19,7 +19,7 @@ const MainPage = () => {
         () => fetchWeather(searchStr),
         { enabled: searchStr.length !== 0 }
     );
-    
+
     const handleChange = ({target: { value }}) => {
         if(!!value){
             const filtered = city.filter(item => item.name.includes(value) || item.state.includes(value));
@@ -28,13 +28,11 @@ const MainPage = () => {
         }
     };
 
-    const debouncedChangeHandler = useCallback(debounce(handleChange, 300), [city]);
+    const debouncedFunction = debounce(handleChange, 300);
+    const debouncedChangeHandler = useCallback(debouncedFunction, [city, debouncedFunction]);
 
     useEffect(() => {
         import("../../data/city.json").then(result => setCity([...result.default]));
-        return () => {
-            debouncedChangeHandler.cancel();
-        }
     } , [])
 
     useEffect(() => {
